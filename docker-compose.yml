@@ -1,0 +1,75 @@
+services:
+  redis:
+    image: redis:6.2-alpine
+    restart: unless-stopped
+    container_name: redis-donotbegay
+    env_file:
+      - .env
+    ports:
+      - "6379:6379"
+    command: redis-server --save 60 1 --loglevel warning --bind 127.0.0.1
+    networks:
+      - donotbegay-network
+
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    restart: unless-stopped
+    container_name: redis-commander-donotbegay
+    environment:
+      - REDIS_HOSTS=redis
+    ports:
+      - "127.0.0.1:8081:8081"
+    depends_on:
+      - redis
+    networks:
+      - donotbegay-network
+
+  postgres:
+    image: postgres:16.3
+    container_name: postgres-donotbegay
+    env_file:
+      - .env
+    environment:
+      ENV: production
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - donotbegay-network
+
+  gateway:
+    build:
+      context: .
+      dockerfile: gateway/Dockerfile
+    env_file:
+      - .env
+    environment:
+      ENV: production
+      HOST: postgres
+    depends_on:
+      - postgres
+    ports:
+      - "4000:4000"
+    networks:
+      - donotbegay-network
+    volumes:
+      - ./static:/root/static
+
+  randomizer:
+    build:
+      context: .
+      dockerfile: randomizer/Dockerfile
+    env_file:
+      - .env
+    environment:
+      ENV: production
+    networks:
+      - donotbegay-network
+
+volumes:
+  db-data:
+  static:
+
+networks:
+  donotbegay-network:

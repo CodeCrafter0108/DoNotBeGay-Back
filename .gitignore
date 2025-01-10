@@ -1,0 +1,22 @@
+# static files
+static/
+
+# binaries
+bin/
+
+vendor/
+
+# env files
+.env
+
+# logs
+*.log
+
+# IDE's
+.idea/
+.vscode/
+
+# OS files
+.DS_Store
+
+# docs

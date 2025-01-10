@@ -1,0 +1,2 @@
+CREATE DATABASE donotbegay_db;
+CREATE EXTENSION IF NOT EXISTS citext;

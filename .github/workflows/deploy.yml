@@ -1,0 +1,67 @@
+name: Deploy to Digital Ocean
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Pull changes and restart Docker containers
+        run: |
+          ssh -o StrictHostKeyChecking=no root@134.209.189.148 << 'EOF'
+          set -e
+
+          echo "Navigating to app directory..."
+          cd /root/apps/donotbegay-backend
+
+          echo "Fetching changes from remote..."
+          git fetch origin main
+
+          echo "Generating list of changed files..."
+          git diff --name-only HEAD..origin/main > changes.txt
+
+          cat changes.txt
+
+          if [ -s changes.txt ]; then
+            echo "Pulling latest changes from main branch..."
+            git pull origin main
+          else
+            echo "No changes detected. Exiting."
+            exit 0
+          fi
+
+          services_to_restart=()
+          if grep -q '^gateway/' changes.txt; then
+            services_to_restart+=("gateway")
+          fi
+          if grep -q '^randomizer/' changes.txt; then
+            services_to_restart+=("randomizer")
+          fi
+
+          if grep -q '^common/' changes.txt; then
+            docker-compose down
+            docker-compose up --build -d
+          fi
+
+          for service in "${services_to_restart[@]}"; do
+            echo "Rebuilding and starting $service..."
+            docker-compose stop $service
+            docker-compose rm -f $service
+            docker-compose up --build -d $service &
+          done
+          wait
+
+          echo "Deployment completed."
+          EOF

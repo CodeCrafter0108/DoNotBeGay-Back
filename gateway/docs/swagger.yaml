@@ -1,0 +1,158 @@
+basePath: /v1
+definitions:
+  main.ErrorResponse:
+    properties:
+      error:
+        type: string
+    type: object
+  main.Health:
+    properties:
+      env:
+        type: string
+      ip:
+        type: string
+      status:
+        type: string
+      version:
+        type: string
+    type: object
+  main.TokenPreSaveResponse:
+    properties:
+      url:
+        type: string
+    type: object
+  main.TokenSaveResponse:
+    properties:
+      message:
+        type: string
+    type: object
+info:
+  contact: {}
+  description: This is a Gateway API for DoNotBeGay service
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: DoNotBeGay API
+paths:
+  /health:
+    get:
+      description: Get health status of the service
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.Health'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/main.ErrorResponse'
+      summary: Get Health
+      tags:
+      - health
+  /static/tokens/{chainId}/{tournamentId}/{filename}:
+    get:
+      description: Get token image to the server
+      parameters:
+      - description: Chain ID
+        enum:
+        - 42161
+        in: path
+        name: chainId
+        required: true
+        type: integer
+      - description: Tournament ID
+        in: path
+        name: tournamentId
+        required: true
+        type: string
+      - description: Filename
+        in: path
+        name: filename
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: file
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/main.ErrorResponse'
+      summary: Get token image
+      tags:
+      - static
+  /static/tokens/create/{chainId}/{userAddress}/{randomBytes}/{tournamentId}:
+    post:
+      description: Pre-save token image. Select a file to upload in formData.
+      parameters:
+      - description: Chain ID
+        enum:
+        - 42161
+        in: path
+        name: chainId
+        required: true
+        type: integer
+      - description: User address
+        in: path
+        name: userAddress
+        required: true
+        type: string
+      - description: Random bytes
+        in: path
+        name: randomBytes
+        required: true
+        type: string
+      - description: Tournament ID
+        in: path
+        name: tournamentId
+        required: true
+        type: string
+      - description: File to upload (max 250KB)
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.TokenPreSaveResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/main.ErrorResponse'
+      summary: Pre-save token image
+      tags:
+      - static
+  /static/tokens/save/{randomBytes}:
+    put:
+      description: Save token image to the server
+      parameters:
+      - description: Random bytes
+        in: path
+        name: randomBytes
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.TokenSaveResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/main.ErrorResponse'
+      summary: Save token image
+      tags:
+      - static
+swagger: "2.0"
