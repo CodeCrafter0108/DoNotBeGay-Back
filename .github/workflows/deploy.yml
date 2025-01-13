@@ -20,7 +20,7 @@ jobs:
 
       - name: Pull changes and restart Docker containers
         run: |
-          ssh -o StrictHostKeyChecking=no root@134.209.189.148 << 'EOF'
+          ssh -o StrictHostKeyChecking=no root@134.209.194.104 << 'EOF'
           set -e
 
           echo "Navigating to app directory..."
