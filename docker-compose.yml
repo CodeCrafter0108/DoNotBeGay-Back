@@ -6,7 +6,7 @@ services:
     env_file:
       - .env
     ports:
-      - "6379:6379"
+      - 6379:6379
     command: redis-server --save 60 1 --loglevel warning --bind 127.0.0.1
     networks:
       - donotbegay-network
@@ -18,7 +18,7 @@ services:
     environment:
       - REDIS_HOSTS=redis
     ports:
-      - "127.0.0.1:8081:8081"
+      - 127.0.0.1:8081:8081
     depends_on:
       - redis
     networks:
@@ -34,7 +34,7 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - 5432:5432
     networks:
       - donotbegay-network
 
@@ -50,7 +50,7 @@ services:
     depends_on:
       - postgres
     ports:
-      - "4000:4000"
+      - 4000:4000
     networks:
       - donotbegay-network
     volumes:
