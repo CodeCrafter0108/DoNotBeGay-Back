@@ -26,8 +26,6 @@ jobs:
           echo "Navigating to app directory..."
           cd /root/apps/donotbegay-backend
 
-          export GIT_AUTH_TOKEN=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
-
           echo "Fetching changes from remote..."
           git fetch origin main
 
