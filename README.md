@@ -5,7 +5,6 @@
 - API for upload tokens images
 - API for getting tokens images
 
-
 ## Randomizer
 
 - Generate random UINT256 number
