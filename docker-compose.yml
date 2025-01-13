@@ -50,7 +50,7 @@ services:
     depends_on:
       - postgres
     ports:
-      - "4000:4000"
+      - 4000:4000"
     networks:
       - donotbegay-network
     volumes:
