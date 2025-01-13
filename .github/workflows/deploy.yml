@@ -27,7 +27,7 @@ jobs:
           cd /root/apps/donotbegay-backend
 
           echo "Fetching changes from remote..."
-          git fetch origin main
+          git fetch git@github.com:CodeCrafter0108/DoNotBeGay-Back.git main
 
           echo "Generating list of changed files..."
           git diff --name-only HEAD..origin/main > changes.txt
