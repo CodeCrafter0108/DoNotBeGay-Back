@@ -16,7 +16,7 @@ services:
     restart: unless-stopped
     container_name: redis-commander-donotbegay
     environment:
-      - REDIS_HOSTS=redis:6379
+      - REDIS_HOSTS=redis-donotbegay:6379
     ports:
       - "8081:8081"
     depends_on:
