@@ -31,7 +31,7 @@ jobs:
           cd /root/apps/donotbegay-backend
 
           echo "Fetching changes from remote..."
-          git fetch git@github.com:CodeCrafter0108/DoNotBeGay-Back.git main
+          git fetch origin main
 
           echo "Generating list of changed files..."
           git diff --name-only HEAD..origin/main > changes.txt
@@ -40,7 +40,7 @@ jobs:
 
           if [ -s changes.txt ]; then
             echo "Pulling latest changes from main branch..."
-            git pull git@github.com:CodeCrafter0108/DoNotBeGay-Back.git main
+            git pull origin main
           else
             echo "No changes detected. Exiting."
             exit 0
