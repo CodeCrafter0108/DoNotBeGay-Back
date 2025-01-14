@@ -2,7 +2,7 @@
 
 ## Gateway
 
-Documentation - [Here](https://donotbegay.eriscrypt.com/v1/docs/index.html)
+Documentation - [Here](https://134.209.194.104/v1/docs/index.html)
 
 - API for upload tokens images
 - API for getting tokens images

@@ -18,10 +18,6 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Add GitHub to known hosts
-        run: |
-            ssh-keyscan github.com >> ~/.ssh/known_hosts
-
       - name: Pull changes and restart Docker containers
         run: |
           ssh -o StrictHostKeyChecking=no root@134.209.194.104 << 'EOF'
