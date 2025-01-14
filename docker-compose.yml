@@ -7,7 +7,7 @@ services:
       - .env
     ports:
       - "6379:6379"
-    command: redis-server --save 60 1 --loglevel warning --bind 0.0.0.0
+    command: redis-server --save 60 1 --loglevel warning --bind 127.0.0.1
     networks:
       - donotbegay-network
 
@@ -16,9 +16,9 @@ services:
     restart: unless-stopped
     container_name: redis-commander-donotbegay
     environment:
-      - REDIS_HOSTS=redis-donotbegay:6379
+      - REDIS_HOSTS=redis
     ports:
-      - "8081:8081"
+      - "127.0.0.1:8081:8081"
     depends_on:
       - redis
     networks:
