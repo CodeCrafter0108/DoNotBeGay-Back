@@ -3,7 +3,7 @@ package blockchain
 type ChainId int
 
 const (
-	ARBITRUM ChainId = 42161
+	ARBITRUM ChainId = 146
 )
 
 var SupportedChains = []ChainId{ARBITRUM}
