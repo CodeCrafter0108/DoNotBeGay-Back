@@ -58,7 +58,7 @@ paths:
       parameters:
       - description: Chain ID
         enum:
-        - 42161
+        - 146
         in: path
         name: chainId
         required: true
@@ -93,7 +93,7 @@ paths:
       parameters:
       - description: Chain ID
         enum:
-        - 42161
+        - 146
         in: path
         name: chainId
         required: true
