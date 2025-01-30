@@ -1,4 +1,4 @@
-// package blockchain
+package blockchain
 
 // type AddressMap map[ChainId]string
 
