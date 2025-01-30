@@ -51,7 +51,7 @@
                 "parameters": [
                     {
                         "enum": [
-                            42161
+                            146
                         ],
                         "type": "integer",
                         "description": "Chain ID",
@@ -152,7 +152,7 @@
                 "parameters": [
                     {
                         "enum": [
-                            42161
+                            146
                         ],
                         "type": "integer",
                         "description": "Chain ID",
