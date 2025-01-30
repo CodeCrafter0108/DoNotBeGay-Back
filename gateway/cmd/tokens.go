@@ -7,7 +7,7 @@ import (
 
 	"github.com/eriscrypt/donotbegay/common/blockchain"
 	"github.com/eriscrypt/donotbegay/gateway/internal"
-	"github.com/ethereum/go-ethereum/common"
+	// "github.com/ethereum/go-ethereum/common"
 	"github.com/go-chi/chi/v5"
 )
 
@@ -46,33 +46,33 @@ func (app *application) tokenPreSaveHandler(w http.ResponseWriter, r *http.Reque
 		return
 	}
 
-	client, err := blockchain.NewClient(chainId)
-	if err != nil {
-		app.internalServerError(w, r, err)
-		return
-	}
+	// client, err := blockchain.NewClient(chainId)
+	// if err != nil {
+	// 	app.internalServerError(w, r, err)
+	// 	return
+	// }
 
-	userAddress := chi.URLParam(r, "userAddress")
+	// userAddress := chi.URLParam(r, "userAddress")
 	randomBytes := chi.URLParam(r, "randomBytes")
 	tournamentId := chi.URLParam(r, "tournamentId")
 
-	userBalance, err := blockchain.GetUserBalance(client, common.HexToAddress(userAddress))
-	if err != nil {
-		app.internalServerError(w, r, err)
-		return
-	}
+	// userBalance, err := blockchain.GetUserBalance(client, common.HexToAddress(userAddress))
+	// if err != nil {
+	// 	app.internalServerError(w, r, err)
+	// 	return
+	// }
 
-	initialLiquidity, err := blockchain.GetInitialLiquidity(client, chainId)
-	if err != nil {
-		app.internalServerError(w, r, err)
-		return
-	}
+	// initialLiquidity, err := blockchain.GetInitialLiquidity(client, chainId)
+	// if err != nil {
+	// 	app.internalServerError(w, r, err)
+	// 	return
+	// }
 
-	// if user balance is less than initial liquidity then return bad request
-	if userBalance.Cmp(initialLiquidity) == -1 {
-		app.badRequestResponse(w, r, errors.New(ErrInsufficientBalance))
-		return
-	}
+	// // if user balance is less than initial liquidity then return bad request
+	// if userBalance.Cmp(initialLiquidity) == -1 {
+	// 	app.badRequestResponse(w, r, errors.New(ErrInsufficientBalance))
+	// 	return
+	// }
 
 	url, err := internal.PreSaveFile(r, randomBytes, chainId, tournamentId)
 	if err != nil {

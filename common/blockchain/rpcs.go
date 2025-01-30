@@ -1,26 +1,26 @@
-package blockchain
+// package blockchain
 
-import (
-	"errors"
-	"strconv"
-)
+// import (
+// 	"errors"
+// 	"strconv"
+// )
 
-type RpcMap map[ChainId]string
+// type RpcMap map[ChainId]string
 
-var Rpcs = RpcMap{
-	ARBITRUM: "https://rpc.ankr.com/arbitrum",
-}
+// var Rpcs = RpcMap{
+// 	ARBITRUM: "https://rpc.ankr.com/arbitrum",
+// }
 
-const (
-	ErrInvalidChainId = "no rpc for chain id"
-)
+// const (
+// 	ErrInvalidChainId = "no rpc for chain id"
+// )
 
-func GetRpc(chainId ChainId) (string, error) {
-	rpc := Rpcs[chainId]
+// func GetRpc(chainId ChainId) (string, error) {
+// 	rpc := Rpcs[chainId]
 
-	if rpc == "" {
-		return "", errors.New(ErrInvalidChainId + " " + strconv.Itoa(int(chainId)))
-	}
+// 	if rpc == "" {
+// 		return "", errors.New(ErrInvalidChainId + " " + strconv.Itoa(int(chainId)))
+// 	}
 
-	return rpc, nil
-}
+// 	return rpc, nil
+// }

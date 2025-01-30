@@ -3,10 +3,10 @@ package blockchain
 type ChainId int
 
 const (
-	ARBITRUM ChainId = 146
+	SONIC ChainId = 146
 )
 
-var SupportedChains = []ChainId{ARBITRUM}
+var SupportedChains = []ChainId{SONIC}
 
 func IsSupportedChain(chainId ChainId) bool {
 	for _, supportedChainId := range SupportedChains {
