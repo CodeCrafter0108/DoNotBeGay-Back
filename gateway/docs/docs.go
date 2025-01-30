@@ -59,7 +59,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "enum": [
-                            42161
+                            146
                         ],
                         "type": "integer",
                         "description": "Chain ID",
@@ -160,7 +160,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "enum": [
-                            42161
+                            146
                         ],
                         "type": "integer",
                         "description": "Chain ID",
